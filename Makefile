@@ -1,19 +1,19 @@
-OUTPUT = velvet.so
+CC = clang 
+CFLAGS = -Iinclude -Wall -Wextra -Werror -pedantic -std=c11
 
-SRCS = $(wildcard src/*.c)
-OBJS = $(SRCS:.c=.o)
+SRC = $(wildcard *.c ./src/*.c) 
+OBJ = $(SRC:.c=.o) 
 
-CC = clang
-CFLAGS = -I include -Wall -Wextra -pedantic -Werror -std=c11
-LDFLAGS = -shared
+all: main velvet.so 
 
-all: $(OUTPUT)
+main: $(OBJ)
+	$(CC) $(CFLAGS) -o main $(OBJ) 
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+velvet.so: $(OBJ) 
+	$(CC) $(CFLAGS) -shared -o velvet.so $(OBJ) 
 
-$(OUTPUT): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
+%.o: %.c 
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
-clean:
-	rm -f ./src/*.o *.o a.out velvet.so
+clean: 
+	rm -f *.o ./src/*.o main velvet.so
