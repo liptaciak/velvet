@@ -4,8 +4,9 @@
 #include <netinet/in.h>
 
 #include <velvet.h>
-#include <velvet_listen.h>
 #include <velvet_process.h>
+
+#include <velvet_listen.h>
 
 void velvet_listen(velvet_app_t* app, uint16_t port) {
     struct sockaddr_in addr = { AF_INET, htons(port), { INADDR_ANY }, { 0 } };
