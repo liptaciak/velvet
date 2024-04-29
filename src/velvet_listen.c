@@ -17,6 +17,14 @@ void velvet_listen(velvet_app_t* app, uint16_t port) {
     listen(app->socket, 128);
 
     socklen_t socklen = sizeof(addr);
-    int client_fd = accept(app->socket, (struct sockaddr*)&addr, &socklen);
-    velvet_process(client_fd);
+
+    velvet_message_t message;
+    int client_fd;
+
+    while(1) {
+        client_fd = accept(app->socket, (struct sockaddr*)&addr, &socklen);
+        message = velvet_process(app, client_fd);
+
+        printf("%s", message.req);
+    }
 }
