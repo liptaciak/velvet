@@ -24,7 +24,8 @@ void velvet_listen(velvet_app_t* app, uint16_t port) {
     while(1) {
         client_fd = accept(app->socket, (struct sockaddr*)&addr, &socklen);
         message = velvet_process(app, client_fd);
-
-        printf("%s", message.req);
+                
+        printf("\n%s\n", message.req);
+        free(message.req);
     }
 }
