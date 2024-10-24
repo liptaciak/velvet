@@ -1,5 +1,5 @@
 CC = clang 
-CFLAGS = -Iinclude -Wall -Wextra -Werror -pedantic -std=c11
+CFLAGS = -fPIC -Iinclude -Wall -Wextra -Werror -pedantic -std=c11
 
 SRC = $(wildcard *.c ./src/*.c) 
 OBJ = $(SRC:.c=.o) 
