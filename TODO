@@ -3,5 +3,4 @@
 - [ ] Parse and store request
 - [/] Store response to message.res
 - [ ] Add support for more methods
-- [ ] Create header struct
 - [ ] Create request struct
