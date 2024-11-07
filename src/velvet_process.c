@@ -36,10 +36,20 @@ velvet_message_t velvet_process(velvet_app_t* app, int client_fd) {
                     velvet_response_t response = app->router[i].response(message.req); // Pass user request as a parameter to route function
 
                     char* header = (char*)malloc(2048 * sizeof(char));
-                    sprintf(header, "HTTP/1.1 %d\nContent-Type: %s\nConnection: close\n\n", response.code, response.content_type);
+                    sprintf(header, "HTTP/1.1 %d\n", response.code);
+                    
+                    // Loop through all headers and append them to response
+                    for (int j = 0; j < response.headers; j++) {
+                        char* temp_header = (char*)malloc(64 * sizeof(char));
+                        sprintf(temp_header, "%s: %s\n", response.header[j].name, response.header[j].value);
+
+                        strcat(header, temp_header);
+                        free(temp_header);
+                    }
+
+                    strcat(header, "\n");
                     
                     // Write header and response from route function to socket
-                    // TODO: Read header content from server response
                     write(client_fd, header, strlen(header));
                     write(client_fd, response.content, strlen(response.content));
 

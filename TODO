@@ -1,0 +1,8 @@
+- [ ] Multithreading 
+- [ ] Read full request
+- [ ] Parse and store request
+- [ ] Send header set by developer to user
+- [/] Store response to message.res
+- [ ] Add support for more methods
+- [ ] Create header struct
+- [ ] Create request struct
